@@ -25,10 +25,22 @@ app.get("/api/todolist", async (req, res) => {
   res.send(result);
 });
 
-app.post("/api/todolist", async (req, res) => {
-  console.log(req.body.description);
-  await db.$queryRaw`insert into todolist (name, description) values (${req.body.name}, ${req.body.description})`;
-  res.send("Nouveau todo ajouté");
+app.post("/api/todolist/", async (req, res) => {
+  try {
+    await db.$queryRaw`insert into todolist (name, description, due_date) values (${req.body.name}, ${req.body.description}, ${req.body.due_date})`;
+    res.send("Nouveau todo ajouté");
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+app.delete("/api/todolist/:id", async (req, res) => {
+  try {
+    await db.$queryRaw`delete from todolist where id = ${req.params.id}`;
+    res.send(`Todo ${id} supprimé`);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 app.listen(port, () => {

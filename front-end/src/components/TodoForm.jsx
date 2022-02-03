@@ -1,37 +1,58 @@
-import e from "express";
 import { useState } from "react";
 import { postTodo } from "../Api";
 
 export default function TodoForm() {
-  const [input, setInput] = useState("");
+  const [inputName, setInputName] = useState("");
+  const [inputDescription, setInputDescription] = useState("");
+  const [inputDueDate, setInputDueDate] = useState("");
 
-  const handleChange = (e) => {
-    setInput(e.target.value);
+  const handleChangeName = (e) => {
+    setInputName(e.target.value);
   };
 
-  const handleSubmit = (input) => {
-    alert("tes la");
-    console.log(input);
-    postTodo(input);
+  const handleChangeDescription = (e) => {
+    setInputDescription(e.target.value);
+  };
+
+  const handleChangeDueDate = (e) => {
+    setInputDueDate(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    postTodo(inputName, inputDescription, inputDueDate);
   };
 
   return (
-    <div className="w-full  mt-10">
-      <form
-        className="w-full flex flex-row justify-between"
-        onSubmit={handleSubmit}
-      >
+    <div className="mt-10 w-full">
+      <form className="flex flex-col" onSubmit={handleSubmit}>
         <input
-          className="bg-gray-600 rounded-full px-2"
+          className="bg-gray-600 rounded-full px-2 mt-2 placeholder-black"
           type="text"
-          placeholder="Add a todo"
+          placeholder="Add a todo name"
           name="text"
-          onChange={handleChange}
+          required
+          onChange={handleChangeName}
+        />
+        <input
+          className="bg-gray-600 rounded-full px-2 mt-2 placeholder-black"
+          type="text"
+          placeholder="Add a todo description"
+          name="text"
+          onChange={handleChangeDescription}
+        />
+        <input
+          className="bg-gray-600 rounded-full px-2 mt-2 placeholder-black"
+          type="date"
+          placeholder="Select a todo due date"
+          name="text"
+          required
+          onChange={handleChangeDueDate}
         />
         <input
           type="submit"
-          value=" Add to the to do list"
-          className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-full px-2"
+          value="Add to the to do list"
+          className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-full px-2 cursor-pointer mt-2 text-gray-300 font-bold"
         />
       </form>
     </div>
