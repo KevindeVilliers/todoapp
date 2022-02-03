@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postTodo } from "../Api";
 
-export default function TodoForm() {
+export default function TodoForm({ fetchData }) {
   const [inputName, setInputName] = useState("");
   const [inputDescription, setInputDescription] = useState("");
   const [inputDueDate, setInputDueDate] = useState("");
@@ -18,9 +18,10 @@ export default function TodoForm() {
     setInputDueDate(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    postTodo(inputName, inputDescription, inputDueDate);
+    await postTodo(inputName, inputDescription, inputDueDate);
+    fetchData();
   };
 
   return (

@@ -20,7 +20,7 @@ const App = () => {
       .catch((e) => console.log(e))
       .finally(() => setLoading(false));
   };
- 
+  console.log(todos);
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-600 to-gray-900">
       <div className="flex flex-col items-center w-1/2 mx-auto">
@@ -29,8 +29,8 @@ const App = () => {
           <p>Chargement en cours</p>
         ) : (
           <>
-            <TodoForm />
-            <TodoList {...todos} fetchData={fetchData} />
+            <TodoForm fetchData={fetchData}/>
+            <TodoList todos={todos} fetchData={fetchData} />
           </>
         )}
       </div>
