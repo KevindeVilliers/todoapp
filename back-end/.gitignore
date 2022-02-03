@@ -1,0 +1,7 @@
+.env
+node_modules
+
+# OS X specifics files
+.DS_Store*
+Icon?
+._*

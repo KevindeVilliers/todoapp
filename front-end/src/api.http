@@ -1,0 +1,10 @@
+GET http://localhost:3001/api/todolist
+
+#############
+POST http://localhost:3001/api/todolist
+Content-Type: application/json
+
+{   
+    "name": "Nouveau todo",
+    "description": "Test description"
+}
